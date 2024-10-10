@@ -9,14 +9,10 @@ namespace DoorScript
 public class Door : MonoBehaviour {
 	public bool open;
 	public float smooth = 1.0f;
-	float DoorOpenAngle = -90.0f;
-    float DoorCloseAngle = 0.0f;
-	public AudioSource asource;
-	public AudioClip openDoor,closeDoor;
+	float DoorOpenAngle = 90f;
+    float DoorCloseAngle = 0.0f;	
 	// Use this for initialization
-	void Start () {
-		asource = GetComponent<AudioSource> ();
-	}
+	
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,10 +30,9 @@ public class Door : MonoBehaviour {
 		}  
 	}
 
-	public void OpenDoor(){
-		open =!open;
-		asource.clip = open?openDoor:closeDoor;
-		asource.Play ();
-	}
+	//public void OpenDoor(){
+	//	open =!open;
+	
+	//}
 }
 }

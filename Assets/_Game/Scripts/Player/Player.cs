@@ -10,9 +10,13 @@ public class Player : Character
     [SerializeField] private FloatingJoystick floatingJoystick;
 
     [SerializeField] GameObject playerVisual;
-    
+
     //[SerializeField] private Rigidbody rb;
 
+    private void Start()
+    {
+        ChangeColor(1);
+    }
     private void Update()
     {
         if (floatingJoystick.Horizontal != 0 && floatingJoystick.Vertical != 0)
