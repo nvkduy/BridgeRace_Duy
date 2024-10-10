@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -8,8 +10,10 @@ public class Character : MonoBehaviour
 
     private IState<Character> currentState;
     [SerializeField] private Animator animator;
-    [SerializeField] ColorType charColor;
-    [SerializeField] ColorData colorData;
+    [SerializeField] private ColorData colorData;
+    [SerializeField] private GameObject bricksPrefab;
+    List<GameObject> playerBrick;
+    List<PlayerBrick> playerBricks;
     private string currentAnim;
     private void Start()
     {
@@ -56,36 +60,29 @@ public class Character : MonoBehaviour
 
     public void ChangeColor(int Index)
     {
-        //Kiểm tra số lượng phần tử của colorMaterials có lơn hơn hoặc bằng số lượng các giá trị của enum ColorType không
-        if (colorData != null && colorData.colorMaterials.Count >= System.Enum.GetValues(typeof(ColorType)).Length)
+        if (colorData != null && colorData.colorMaterials.Count > Index)
         {
-            Material selectedMaterial = null;
-            switch (charColor)
+            MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
+            if (meshRenderer != null)
             {
-                case ColorType.Red:
-                    selectedMaterial = colorData.colorMaterials[0];
-                    break;
-                case ColorType.Green:
-                    selectedMaterial = colorData.colorMaterials[1];
-                    break;
-                case ColorType.Blue:
-                    selectedMaterial = colorData.colorMaterials[2];
-                    break;
-                case ColorType.Yellow:
-                    selectedMaterial = colorData.colorMaterials[3];
-                    break;
-                case ColorType.Pink:
-                    selectedMaterial = colorData.colorMaterials[4];
-                    break;
-                case ColorType.Orange:
-                    selectedMaterial = colorData.colorMaterials[5];
-                    break;
-            }
-            if (selectedMaterial != null)
-            {
-                GetComponent<Renderer>().material = selectedMaterial;
+                Material selectedMaterial = colorData.colorMaterials[Index];
+                meshRenderer.material = selectedMaterial;
             }
         }
+
+    }
+
+    public void AddBrick(GameObject brick)
+    {
+        
+        brick = Instantiate(bricksPrefab, this.transform);
+        playerBrick.Add(brick);
+        ////playerRender.transform.position = new Vector3(transform.position.x, transform.position.y + hightBrick, transform.position.z);
+        ////brick.transform.position = new Vector3(transform.position.x, transform.position.y - .25f + hightBrick, transform.position.z);
+        //brick.transform.rotation = Quaternion.Euler(270, 0, 0);
+        ////hightBrick += 0.25f;
+        
+       
     }
 
 }
