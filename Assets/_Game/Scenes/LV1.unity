@@ -5865,6 +5865,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8605438865007876440}
+  - component: {fileID: 8605438865007876441}
   m_Layer: 0
   m_Name: 'Floor - 1 '
   m_TagString: Untagged
@@ -7286,7 +7287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1817472388032871095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2369104875309210247, guid: 895b6304f3cf5904095efe0490ac2a71, type: 3}
@@ -14640,6 +14641,23 @@ Transform:
   - {fileID: 1432690571}
   m_Father: {fileID: 6227996434008764240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8605438865007876441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611094990876143643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bb620ee06ade94bba67200847392d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startSpawn: {x: -2, y: -4.15, z: -2.4}
+  rows: 9
+  columns: 9
+  spacing: 0.6
+  brickPrefab: {fileID: 2257642109056168153, guid: 895b6304f3cf5904095efe0490ac2a71, type: 3}
 --- !u!4 &8608644246855661267
 Transform:
   m_ObjectHideFlags: 0
