@@ -25,21 +25,23 @@ public class Player : Character
         }
         else
         {
-            ChangeAnim("Idle");
+            ChangeAnim(Constant.RunAnimName);
         }
-            
+
     }
 
     private void MovePlayer()
     {
-        
+
         ChangeAnim("Run");
-        Vector3 direction = Vector3.forward * floatingJoystick.Vertical + Vector3.right * floatingJoystick.Horizontal;        
+        Vector3 direction = Vector3.forward * floatingJoystick.Vertical + Vector3.right * floatingJoystick.Horizontal;
         transform.Translate(direction * speedMove * Time.deltaTime);
-                 
-            // transform.rotation = Quaternion.LookRotation(direction);
-            Vector3 lookDirection = direction + playerVisual.transform.position;
-            playerVisual.transform.LookAt(lookDirection);
-        
+
+        // transform.rotation = Quaternion.LookRotation(direction);
+        Vector3 lookDirection = direction + playerVisual.transform.position;
+        playerVisual.transform.LookAt(lookDirection);
+
     }
 }
+
+   

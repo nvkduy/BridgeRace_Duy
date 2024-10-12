@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,8 +11,9 @@ public class Character : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private ColorData colorData;
     [SerializeField] private GameObject bricksPrefab;
-    List<GameObject> playerBrick;
-    List<PlayerBrick> playerBricks;
+    [SerializeField] GameObject playerVisual;
+
+    List<GameObject> playerBrick;   
     private string currentAnim;
     private void Start()
     {
@@ -62,7 +62,7 @@ public class Character : MonoBehaviour
     {
         if (colorData != null && colorData.colorMaterials.Count > Index)
         {
-            MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
+            SkinnedMeshRenderer meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
             if (meshRenderer != null)
             {
                 Material selectedMaterial = colorData.colorMaterials[Index];
@@ -77,12 +77,13 @@ public class Character : MonoBehaviour
         
         brick = Instantiate(bricksPrefab, this.transform);
         playerBrick.Add(brick);
-        ////playerRender.transform.position = new Vector3(transform.position.x, transform.position.y + hightBrick, transform.position.z);
+        playerVisual.transform.position = new Vector3(transform.position.x, transform.position.y +1f, transform.position.z + 1f);
         ////brick.transform.position = new Vector3(transform.position.x, transform.position.y - .25f + hightBrick, transform.position.z);
         //brick.transform.rotation = Quaternion.Euler(270, 0, 0);
         ////hightBrick += 0.25f;
-        
-       
+
     }
 
 }
+
+
