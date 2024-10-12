@@ -6,7 +6,7 @@ public class Floor : MonoBehaviour
 {
     private List<GameObject> bricks;
     private int index = 0;
-    [SerializeField]  ColorData color;
+    [SerializeField]  ColorSO color;
 
     private void SpawnBrick()
     {
@@ -16,18 +16,10 @@ public class Floor : MonoBehaviour
     {
 
     }
-    private void ChangeColorBrick(int Index)
+    private void ChangeColorBrick()
     {
        
-            if (color != null && color.colorMaterials.Count>Index)
-            {
-                SkinnedMeshRenderer meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-                if (meshRenderer != null)
-                {
-                    Material selectedMaterial = color.colorMaterials[Index];
-                    meshRenderer.material = selectedMaterial;
-                }
-            }
+         
 
     }
 }

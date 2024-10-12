@@ -9,9 +9,9 @@ public class Character : MonoBehaviour
 
     private IState<Character> currentState;
     [SerializeField] private Animator animator;
-    [SerializeField] private ColorData colorData;
+    [SerializeField] private ColorSO colorData;
     [SerializeField] private GameObject bricksPrefab;
-    [SerializeField] GameObject playerVisual;
+    [SerializeField] GameObject CharacterVisual;
 
     List<GameObject> playerBrick;   
     private string currentAnim;
@@ -60,15 +60,6 @@ public class Character : MonoBehaviour
 
     public void ChangeColor(int Index)
     {
-        if (colorData != null && colorData.colorMaterials.Count > Index)
-        {
-            SkinnedMeshRenderer meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-            if (meshRenderer != null)
-            {
-                Material selectedMaterial = colorData.colorMaterials[Index];
-                meshRenderer.material = selectedMaterial;
-            }
-        }
 
     }
 
@@ -77,7 +68,7 @@ public class Character : MonoBehaviour
         
         brick = Instantiate(bricksPrefab, this.transform);
         playerBrick.Add(brick);
-        playerVisual.transform.position = new Vector3(transform.position.x, transform.position.y +1f, transform.position.z + 1f);
+        CharacterVisual.transform.position = new Vector3(transform.position.x, transform.position.y +1f, transform.position.z + 1f);
         ////brick.transform.position = new Vector3(transform.position.x, transform.position.y - .25f + hightBrick, transform.position.z);
         //brick.transform.rotation = Quaternion.Euler(270, 0, 0);
         ////hightBrick += 0.25f;

@@ -21,11 +21,12 @@ public class Player : Character
     {
         if (floatingJoystick.Horizontal != 0 && floatingJoystick.Vertical != 0)
         {
+            
             MovePlayer();
         }
         else
         {
-            ChangeAnim(Constant.RunAnimName);
+            ChangeAnim(Constant.IdleAnimName);
         }
 
     }
@@ -33,7 +34,7 @@ public class Player : Character
     private void MovePlayer()
     {
 
-        ChangeAnim("Run");
+        ChangeAnim(Constant.RunAnimName);
         Vector3 direction = Vector3.forward * floatingJoystick.Vertical + Vector3.right * floatingJoystick.Horizontal;
         transform.Translate(direction * speedMove * Time.deltaTime);
 
