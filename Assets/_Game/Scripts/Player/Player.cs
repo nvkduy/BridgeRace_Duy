@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,22 +15,41 @@ public class Player : Character
 
     private void Start()
     {
-        ChangeColor(1);
+        ChangeColor();
     }
     private void Update()
     {
         if (floatingJoystick.Horizontal != 0 && floatingJoystick.Vertical != 0)
         {
-            
+           
+
             MovePlayer();
         }
         else
         {
             ChangeAnim(Constant.IdleAnimName);
         }
+        CheckMovementDirection();
+
 
     }
-
+    public void CheckMovementDirection()
+    {
+        float threshold = 0.01f; // Ngưỡng nhỏ để bỏ qua các giá trị gần bằng 0
+        Debug.Log("forward.y: " + transform.forward.y);
+        if (transform.forward.y > threshold)
+        {
+            Debug.Log("Moving Up");
+        }
+        else if (transform.forward.y < -threshold)
+        {
+            Debug.Log("Moving Down");
+        }
+        else
+        {
+            Debug.Log("Moving Horizontally");
+        }
+    }
     private void MovePlayer()
     {
 
@@ -43,6 +62,31 @@ public class Player : Character
         playerVisual.transform.LookAt(lookDirection);
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Kiểm tra xem đối tượng va chạm có phải là GroundBrick hay không
+        GroundBrick brick = other.GetComponent<GroundBrick>();
+        if (brick != null)
+        {
+            // So sánh màu của Player và màu của Brick
+            if (brick.colorType == colorType)
+            {
+                Debug.Log("Same Color! Destroying Brick.");
+                Destroy(brick.gameObject);
+                AddBrick(BricksPrefab);
+                // cập nhật danh sách bricks trong Floor
+                Floor floor = FindObjectOfType<Floor>();
+                if (floor != null)
+                {
+                    floor.bricks.Remove(brick);
+                }
+            }
+        }
+
+
+    }
+
 }
 
-   
+

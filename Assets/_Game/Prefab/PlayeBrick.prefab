@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2369104875309210247}
   - component: {fileID: 5275262720981759600}
-  - component: {fileID: 2536106251227965559}
   m_Layer: 0
-  m_Name: GroundBrick
+  m_Name: PlayeBrick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,27 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData: {fileID: 11400000, guid: 1103f9fdaa7884843aabb52a430178e1, type: 2}
   m_Renderer: {fileID: 4891238570772499982}
---- !u!65 &2536106251227965559
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2257642109056168153}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 0.7, z: 0.7}
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &4148461262037902106
 GameObject:
   m_ObjectHideFlags: 0

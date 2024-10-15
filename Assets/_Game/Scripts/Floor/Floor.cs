@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
-   // [SerializeField] ColorSO color;
-    [SerializeField] private Vector3 startSpawn;
+   // [SerializeField] ColorOS color;   
     [SerializeField] private int rows;
     [SerializeField] private int columns;
     [SerializeField] private float spacing = 0.5f;
-    [SerializeField] private GameObject brickPrefab;
+    [SerializeField] private GroundBrick brickPrefab;
 
-    private List<GameObject> bricks;
+    [SerializeField] private Transform brickParent;
+
+    public List<GroundBrick> bricks;
     private int index = 0;
-    private void Awake()
+    private void OnEnable()
     {
         OnInit();
     }
     private void OnInit()
     {
-        bricks = new List<GameObject>();
+        bricks = new List<GroundBrick>();
         SpawnBrick();  
     }
     private void SpawnBrick()
@@ -30,22 +31,26 @@ public class Floor : MonoBehaviour
             for (int j = 0; j <= columns; j++)
             {
                 
-                GameObject brick = Instantiate(brickPrefab,startSpawn + new Vector3(i, 0, j) * spacing,Quaternion.identity);
+                GroundBrick brick = Instantiate<GroundBrick>(brickPrefab,brickParent);
+                brick.transform.localPosition = new Vector3(i,0,j)*spacing;
+                brick.OnInit();
                 bricks.Add(brick);
+
             }
                 
         }
     }
 
- 
+
 
     private void RemoveBrick()
     {
         if (bricks.Count > 0)
         {
-            GameObject RemoveToBrick = bricks[bricks.Count - 1];
+            GroundBrick RemoveToBrick = bricks[bricks.Count - 1];
             bricks.Remove(RemoveToBrick);
+            
         }
     }
-   
+
 }

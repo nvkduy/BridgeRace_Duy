@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,11 +9,21 @@ public class Character : MonoBehaviour
 
     private IState<Character> currentState;
     [SerializeField] private Animator animator;
-    [SerializeField] private ColorSO colorData;
+    [SerializeField] private ColorOS colorData;
     [SerializeField] private GameObject bricksPrefab;
-    [SerializeField] GameObject CharacterVisual;
+    public GameObject BricksPrefab
+    {
+        get { return bricksPrefab; }
+        set { bricksPrefab = value; }
+    }
+    [SerializeField] GameObject characterVisual;
+    [SerializeField] SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] private float hightBrick;
+    
 
-    List<GameObject> playerBrick;   
+    public ColorType colorType { get; private set; }
+
+    List<GameObject> playerBrick;
     private string currentAnim;
     private void Start()
     {
@@ -58,8 +68,10 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void ChangeColor(int Index)
+    public void ChangeColor()
     {
+        colorType = (ColorType)Random.Range(0, 4);
+        skinnedMeshRenderer.material =  colorData.GetMaterial(colorType);
 
     }
 
@@ -68,11 +80,16 @@ public class Character : MonoBehaviour
         
         brick = Instantiate(bricksPrefab, this.transform);
         playerBrick.Add(brick);
-        CharacterVisual.transform.position = new Vector3(transform.position.x, transform.position.y +1f, transform.position.z + 1f);
-        ////brick.transform.position = new Vector3(transform.position.x, transform.position.y - .25f + hightBrick, transform.position.z);
+        //characterVisual.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z + 1f);
+        brick.transform.position = new Vector3(transform.position.x, transform.position.y - .25f + hightBrick, transform.position.z);
         //brick.transform.rotation = Quaternion.Euler(270, 0, 0);
         ////hightBrick += 0.25f;
 
+    }
+
+    public void RemoveBrickGround()
+    {
+      
     }
 
 }

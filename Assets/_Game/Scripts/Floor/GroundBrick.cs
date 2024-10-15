@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class GroundBrick : MonoBehaviour
 {
-    [SerializeField] private MeshRenderer m_Renderer;
+    [SerializeField] ColorOS colorData;
+    [SerializeField] MeshRenderer m_Renderer;
+
+    public ColorType colorType { get; private set; }
 
     public void OnInit()
     {
@@ -13,6 +16,7 @@ public class GroundBrick : MonoBehaviour
 
     public void ChangeColorBrick()
     {
-       
+        colorType = (ColorType)Random.Range(0, 4);
+        m_Renderer.material = colorData.GetMaterial(colorType);
     }
 }

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2a6fff4214ead47bea84a92d96d275, type: 3}
+  m_Script: {fileID: 11500000, guid: a65e8e3c2d97e854ab3608a1ca4f9682, type: 3}
   m_Name: ColorData
   m_EditorClassIdentifier: 
   colorMaterials:
@@ -17,5 +17,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 22f3217a839f5874bb3d9bd2e5eb8cde, type: 2}
   - {fileID: 2100000, guid: 2f5faf10c72047c4e93eeae55fd5ff5e, type: 2}
   - {fileID: 2100000, guid: eed9efdc6d467ef47a1898b3b89942c4, type: 2}
-  - {fileID: 2100000, guid: 4e167afe9d22b0242a3ff5301c4d49e1, type: 2}
   - {fileID: 2100000, guid: bf1673518669a2148a85afc2339ba707, type: 2}
