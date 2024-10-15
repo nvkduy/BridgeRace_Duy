@@ -6,21 +6,25 @@ public class StepStair : MonoBehaviour
 {
     [SerializeField] ColorOS colorData;
     [SerializeField] MeshRenderer m_Renderer;
-
+    public ColorType colorType { get; private set; }
+   
     private void OnTriggerEnter(Collider other)
     {
         // Kiểm tra xem đối tượng va chạm có phải là Player hay không
-        Player player = other.GetComponentInChildren<Player>();
+        Player player = other.GetComponent<Player>();
         if (player!=null)
         {
-
-            Debug.Log("vacham");
-            //Gán colorType của playe = color mới
-            ColorType newColor = player.colorType;
-            Material newMaterial = colorData.GetMaterial(newColor);
-            m_Renderer.material = newMaterial;
+            if (player.playerBrick.Count > 0)
+            {
+                
+                //Gán colorType của playe = color mới
+                colorType = player.colorType;
+                Material newMaterial = colorData.GetMaterial(colorType);
+                m_Renderer.material = newMaterial;
+                player.RemoveBrickGround();
+                
+            }      
         }
-
 
     }
 }

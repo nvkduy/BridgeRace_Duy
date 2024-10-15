@@ -10,20 +10,22 @@ public class Character : MonoBehaviour
     private IState<Character> currentState;
     [SerializeField] private Animator animator;
     [SerializeField] private ColorOS colorData;
-    [SerializeField] private GameObject bricksPrefab;
-    public GameObject BricksPrefab
-    {
-        get { return bricksPrefab; }
-        set { bricksPrefab = value; }
-    }
+    [SerializeField] private GameObject playerBricksPrefab;
     [SerializeField] GameObject characterVisual;
     [SerializeField] SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] private float hightBrick;
+    [SerializeField] Transform characterVisualTrans;
+
+    protected bool isMoveup=true;
     
 
     public ColorType colorType { get; private set; }
-
-    List<GameObject> playerBrick;
+    public GameObject PlayerBricksPrefab
+    {
+        get { return playerBricksPrefab; }
+        set { playerBricksPrefab = value; }
+    }
+    public List<GameObject> playerBrick = new List<GameObject>();
     private string currentAnim;
     private void Start()
     {
@@ -41,7 +43,7 @@ public class Character : MonoBehaviour
     private void OnInit()
     {
         ChangeState(new IdleState());
-
+       
     }
     public void ChangeState(IState<Character> state)
     {
@@ -78,18 +80,59 @@ public class Character : MonoBehaviour
     public void AddBrick(GameObject brick)
     {
         
-        brick = Instantiate(bricksPrefab, this.transform);
+        brick = Instantiate(playerBricksPrefab, this.transform);   
         playerBrick.Add(brick);
         //characterVisual.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z + 1f);
-        brick.transform.position = new Vector3(transform.position.x, transform.position.y - .25f + hightBrick, transform.position.z);
+        brick.transform.position = new Vector3(transform.position.x, transform.position.y + hightBrick, transform.position.z -0.3f);   
         //brick.transform.rotation = Quaternion.Euler(270, 0, 0);
-        ////hightBrick += 0.25f;
+        hightBrick += 0.08f;
+        
 
     }
 
     public void RemoveBrickGround()
     {
-      
+      if (playerBrick.Count > 0)
+        {
+            GameObject RemoveToBrick = playerBrick[playerBrick.Count - 1];
+            playerBrick.Remove(RemoveToBrick);
+            Destroy(RemoveToBrick);
+
+        }
+    }
+
+
+    //public void MovingUp()
+    //{
+    //    if (characterVisualTrans.transform.forward.z > 0 && playerBrick.Count<0)
+    //    {
+    //        isMoveup = false;
+    //        Debug.Log(isMoveup);
+    //        //Debug.Log(chacracterVisualTrans.forward.z); 
+    //    }
+
+    //}
+    internal virtual void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Stair"))
+        {
+            StepStair step = collision.gameObject.GetComponent<StepStair>();
+            
+            if (characterVisualTrans.forward.z > 0 && playerBrick.Count==0 && step.colorType != colorType)
+            {
+                Debug.Log("A");
+                
+                isMoveup = false;
+                
+                
+            }
+            else if(characterVisualTrans.forward.z<0)
+            {
+                Debug.Log(characterVisualTrans.forward.z);
+                isMoveup = true;
+            }
+            
+        }
     }
 
 }

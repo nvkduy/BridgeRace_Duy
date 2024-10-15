@@ -13,7 +13,7 @@ public class Floor : MonoBehaviour
 
     [SerializeField] private Transform brickParent;
 
-    public List<GroundBrick> bricks;
+    //public List<GroundBrick> bricks;
     private int index = 0;
     private void OnEnable()
     {
@@ -21,7 +21,7 @@ public class Floor : MonoBehaviour
     }
     private void OnInit()
     {
-        bricks = new List<GroundBrick>();
+        //bricks = new List<GroundBrick>();
         SpawnBrick();  
     }
     private void SpawnBrick()
@@ -34,7 +34,7 @@ public class Floor : MonoBehaviour
                 GroundBrick brick = Instantiate<GroundBrick>(brickPrefab,brickParent);
                 brick.transform.localPosition = new Vector3(i,0,j)*spacing;
                 brick.OnInit();
-                bricks.Add(brick);
+                //bricks.Add(brick);
 
             }
                 
@@ -45,12 +45,7 @@ public class Floor : MonoBehaviour
 
     private void RemoveBrick()
     {
-        if (bricks.Count > 0)
-        {
-            GroundBrick RemoveToBrick = bricks[bricks.Count - 1];
-            bricks.Remove(RemoveToBrick);
-            
-        }
+      
     }
 
 }
