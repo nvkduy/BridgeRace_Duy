@@ -6,7 +6,7 @@ public class GroundBrick : MonoBehaviour
 {
     [SerializeField] ColorOS colorData;
     [SerializeField] MeshRenderer m_Renderer;
-
+    [SerializeField] Character character;
     public ColorType colorType { get; private set; }
 
     public void OnInit()
@@ -16,7 +16,7 @@ public class GroundBrick : MonoBehaviour
 
     public void ChangeColorBrick()
     {
-        colorType = (ColorType)Random.Range(0, 4);
+        colorType = (ColorType)Random.Range(0,character.colorTypes.Count);
         m_Renderer.material = colorData.GetMaterial(colorType);
     }
 }

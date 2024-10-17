@@ -1,4 +1,5 @@
 ﻿
+using DoorScript;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,7 +18,7 @@ public class Character : MonoBehaviour
     [SerializeField] Transform characterVisualTrans;
 
     protected bool isMoveup=true;
-    
+    public Floor floor;
 
     public ColorType colorType { get; private set; }
     public GameObject PlayerBricksPrefab
@@ -25,6 +26,7 @@ public class Character : MonoBehaviour
         get { return playerBricksPrefab; }
         set { playerBricksPrefab = value; }
     }
+    public List<ColorType> colorTypes { get; private set; } =new List<ColorType>();
     public List<GameObject> playerBrick = new List<GameObject>();
     private string currentAnim;
     private void Start()
@@ -100,36 +102,33 @@ public class Character : MonoBehaviour
 
         }
     }
-
-
-    //public void MovingUp()
-    //{
-    //    if (characterVisualTrans.transform.forward.z > 0 && playerBrick.Count<0)
-    //    {
-    //        isMoveup = false;
-    //        Debug.Log(isMoveup);
-    //        //Debug.Log(chacracterVisualTrans.forward.z); 
-    //    }
-
-    //}
     internal virtual void OnTriggerEnter(Collider collision)
     {
         StepStair step = collision.gameObject.GetComponent<StepStair>();
         if (step != null)
-        {
-           
-               isMoveup = (step.colorType == colorType);
-            
+        {   
+
+               isMoveup = (step.colorType == colorType);         
         }
-      
+    
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Door"))
+        {
+
+            colorTypes.Add(colorType);
+            floor.OnInit();
+        }
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Stair"))
         {
             isMoveup=true;
             Debug.Log("Out Stair");
+            
         }
     }
 

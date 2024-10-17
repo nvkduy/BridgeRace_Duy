@@ -12,16 +12,15 @@ public class Floor : MonoBehaviour
     [SerializeField] private GroundBrick brickPrefab;
 
     [SerializeField] private Transform brickParent;
+    //
+    //public List<ColorType> colors = new List<ColorType>();
 
-    //public List<GroundBrick> bricks;
+    
     private int index = 0;
-    private void OnEnable()
+    
+    public void OnInit()
     {
-        OnInit();
-    }
-    private void OnInit()
-    {
-        //bricks = new List<GroundBrick>();
+        
         SpawnBrick(brickParent);  
     }
     public void SpawnBrick(Transform brickParent)

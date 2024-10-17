@@ -17,7 +17,7 @@ public class StepStair : MonoBehaviour
             if (player.playerBrick.Count > 0 && player.colorType!=colorType)
             {
                 
-                //Gán colorType của playe = color mới
+                //Gán colorType của player = color mới
                 colorType = player.colorType;
                 m_Renderer.material = colorData.GetMaterial(colorType);       
                 player.RemoveBrickGround();

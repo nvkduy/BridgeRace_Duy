@@ -39,7 +39,6 @@ namespace DoorScript
             if (collision.gameObject.CompareTag("Player"))
             {
                 open = true;
-                floor.SpawnBrick(brickParent2);
                 boxCollider.enabled = false;
             }
         }
