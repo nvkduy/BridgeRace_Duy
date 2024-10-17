@@ -22,8 +22,5 @@ public class ColorOS : ScriptableObject
     {
         return colorMaterials[(int)colorType];
     }
-    //public Material GetMaterial(int colorType)
-    //{
-    //    return colorMaterials[colorType];
-    //}
+   
 }

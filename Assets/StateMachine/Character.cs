@@ -114,26 +114,25 @@ public class Character : MonoBehaviour
     //}
     internal virtual void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Stair"))
+        StepStair step = collision.gameObject.GetComponent<StepStair>();
+        if (step != null)
         {
-            StepStair step = collision.gameObject.GetComponent<StepStair>();
-            
-            if (characterVisualTrans.forward.z > 0 && playerBrick.Count==0 && step.colorType != colorType)
-            {
-                Debug.Log("A");
-                
-                isMoveup = false;
-                
-                
-            }
-            else if(characterVisualTrans.forward.z<0)
-            {
-                Debug.Log(characterVisualTrans.forward.z);
-                isMoveup = true;
-            }
+           
+               isMoveup = (step.colorType == colorType);
             
         }
+      
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Stair"))
+        {
+            isMoveup=true;
+            Debug.Log("Out Stair");
+        }
+    }
+
 
 }
 

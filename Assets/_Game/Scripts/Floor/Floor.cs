@@ -22,9 +22,9 @@ public class Floor : MonoBehaviour
     private void OnInit()
     {
         //bricks = new List<GroundBrick>();
-        SpawnBrick();  
+        SpawnBrick(brickParent);  
     }
-    private void SpawnBrick()
+    public void SpawnBrick(Transform brickParent)
     {
         for (int i = 0; i <= rows; i++)
         {

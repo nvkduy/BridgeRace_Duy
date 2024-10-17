@@ -14,13 +14,12 @@ public class StepStair : MonoBehaviour
         Player player = other.GetComponent<Player>();
         if (player!=null)
         {
-            if (player.playerBrick.Count > 0)
+            if (player.playerBrick.Count > 0 && player.colorType!=colorType)
             {
                 
                 //Gán colorType của playe = color mới
                 colorType = player.colorType;
-                Material newMaterial = colorData.GetMaterial(colorType);
-                m_Renderer.material = newMaterial;
+                m_Renderer.material = colorData.GetMaterial(colorType);       
                 player.RemoveBrickGround();
                 
             }      
