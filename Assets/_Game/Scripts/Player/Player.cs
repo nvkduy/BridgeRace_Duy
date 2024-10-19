@@ -69,6 +69,7 @@ public class Player : Character
             {
    
                 Destroy(brick.gameObject);
+                brick.OnDespawn();
                 AddBrick(PlayerBricksPrefab);
        
             }
