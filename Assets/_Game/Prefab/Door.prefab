@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1809896260104768060}
   - component: {fileID: 341129153917869609}
   - component: {fileID: 7412531624209581605}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floor: {fileID: 0}
   brickParent2: {fileID: 0}
-  boxCollider: {fileID: 0}
+  boxCollider: {fileID: 7412531624209581605}
   smooth: 1
 --- !u!65 &7412531624209581605
 BoxCollider:

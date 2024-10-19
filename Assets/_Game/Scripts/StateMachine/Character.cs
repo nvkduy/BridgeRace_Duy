@@ -29,7 +29,7 @@ public class Character : MonoBehaviour
     public List<ColorType> colorTypes { get; private set; } = new List<ColorType>();
     public List<GameObject> playerBrick = new List<GameObject>();
     private string currentAnim;
-    private void Start()
+    protected virtual void Start()
     {
         OnInit();
     }

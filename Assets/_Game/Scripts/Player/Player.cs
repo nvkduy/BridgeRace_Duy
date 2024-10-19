@@ -36,7 +36,6 @@ public class Player : Character
     private void OnInit()
     {
         ChangeColor();
-
     }
   
     private void MovePlayer()
