@@ -827,6 +827,7 @@ GameObject:
   - component: {fileID: 420868951}
   - component: {fileID: 420868953}
   - component: {fileID: 420868954}
+  - component: {fileID: 420868955}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -853,7 +854,6 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 8913218761255123563}
   hightBrick: 0.25
   characterVisualTrans: {fileID: 543450651939543095}
-  floor: {fileID: 8605438865007876441}
   playerBrick: []
   speedMove: 5
   floatingJoystick: {fileID: 731751144}
@@ -922,6 +922,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.31481862, z: 0.3}
   m_Center: {x: 0, y: 0.16835368, z: 0}
+--- !u!114 &420868955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420868950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125f566a176cec1448183713cd7d9863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorTypes: 
 --- !u!4 &482868716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4041869520288912, guid: 3508cc32c5963d9429bfd01098eddb4d, type: 3}
@@ -1675,13 +1688,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 291870871}
-  colorData: {fileID: 0}
-  playerBricksPrefab: {fileID: 0}
-  characterVisual: {fileID: 0}
+  colorData: {fileID: 11400000, guid: 1103f9fdaa7884843aabb52a430178e1, type: 2}
+  playerBricksPrefab: {fileID: 2257642109056168153, guid: 8f7f19adbdd59ed4d816771583adb205, type: 3}
+  characterVisual: {fileID: 919132147736887949}
   skinnedMeshRenderer: {fileID: 1566320871}
   hightBrick: 0
   characterVisualTrans: {fileID: 291870869}
-  floor: {fileID: 0}
   playerBrick: []
   agent: {fileID: 790526754}
   botGoal: {fileID: 542535945}
@@ -1742,7 +1754,7 @@ Transform:
   m_GameObject: {fileID: 790526753}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.09, z: 16.24}
+  m_LocalPosition: {x: 0, y: -4.51, z: 0.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7798,8 +7810,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45bb620ee06ade94bba67200847392d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 5
-  columns: 5
+  rows: 6
+  columns: 6
   spawnNumber: 0
   spacing: 0.5
   brickPrefab: {fileID: 5275262720981759600, guid: 895b6304f3cf5904095efe0490ac2a71, type: 3}
@@ -12228,8 +12240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45bb620ee06ade94bba67200847392d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 6
-  columns: 6
+  rows: 0
+  columns: 0
   spawnNumber: 0
   spacing: 1
   brickPrefab: {fileID: 5275262720981759600, guid: 895b6304f3cf5904095efe0490ac2a71, type: 3}

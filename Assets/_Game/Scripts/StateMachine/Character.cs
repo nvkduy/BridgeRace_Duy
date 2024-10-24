@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Character : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class Character : MonoBehaviour
     [SerializeField] Transform characterVisualTrans;
 
     protected bool isMoveup = true;
-    public Floor floor;
+    private Floor floor;
 
     public ColorType colorType { get; private set; }
     public GameObject PlayerBricksPrefab
@@ -26,7 +27,7 @@ public class Character : MonoBehaviour
         get { return playerBricksPrefab; }
         set { playerBricksPrefab = value; }
     }
-    public List<ColorType> colorTypes { get; private set; } = new List<ColorType>();
+    //public List<ColorType> colorTypes  = new List<ColorType>();
     public List<GameObject> playerBrick = new List<GameObject>();
     private string currentAnim;
     protected virtual void Start()
@@ -44,6 +45,7 @@ public class Character : MonoBehaviour
     }
     private void OnInit()
     {
+       
         ChangeState(new IdleState());
 
     }
@@ -91,6 +93,32 @@ public class Character : MonoBehaviour
 
 
     }
+    public void AddColorTypes(ColorType colorType)
+    {
+        if (!ColorManager.Instance.colorTypes.Contains(colorType))
+        {
+            ColorManager.Instance.colorTypes.Add(colorType);
+            Debug.Log($"Added {colorType} to the list.");
+        }
+
+        // Debug kiểm tra sau khi thêm
+        //Debug.Log("Added color: " + ColorManager.Instance.colorType.ToString());
+        Debug.Log("colorTypes count after adding: " + ColorManager.Instance.colorTypes.Count);
+        if (floor == null)
+        {
+            floor = FindObjectOfType<Floor>();
+        }
+        // Kiểm tra nếu colorTypes không rỗng, gọi OnInit của floor
+        if (ColorManager.Instance.colorTypes.Count > 0)
+        {
+            Debug.Log("colorTypes is not empty, calling floor.OnInit()");
+            floor.OnInit();
+        }
+        else
+        {
+            Debug.LogWarning("colorTypes is empty, not calling floor.OnInit()");
+        }
+    }
 
     public void RemoveBrickGround()
     {
@@ -118,26 +146,7 @@ public class Character : MonoBehaviour
         if (collision.gameObject.CompareTag("Door"))
         {
             // Kiểm tra xem colorType đã có trong danh sách chưa
-            if (!colorTypes.Contains(colorType))
-            {
-                colorTypes.Add(colorType); 
-                Debug.Log($"Added {colorType} to the list.");
-            }
-            
-            // Debug kiểm tra sau khi thêm
-            Debug.Log("Added color: " + colorType.ToString());
-            Debug.Log("colorTypes count after adding: " + colorTypes.Count);
-
-            // Kiểm tra nếu colorTypes không rỗng, gọi OnInit của floor
-            if (colorTypes.Count > 0)
-            {
-                Debug.Log("colorTypes is not empty, calling floor.OnInit()");
-                floor.OnInit();
-            }
-            else
-            {
-                Debug.LogWarning("colorTypes is empty, not calling floor.OnInit()");
-            }
+          
         }
 
     }

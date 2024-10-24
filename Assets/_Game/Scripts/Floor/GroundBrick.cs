@@ -7,31 +7,23 @@ public class GroundBrick : MonoBehaviour
 {
     [SerializeField] ColorOS colorData;
     [SerializeField] MeshRenderer m_Renderer;
-    [SerializeField] Character character;
+    private Character character;
 
-    public Floor floor;
+    internal Floor floor;
     public ColorType colorType { get; private set; }
 
-    public void OnInit()
-    {
-        if (character == null)
-        {
-            character = FindObjectOfType<Character>(); ;
-        }
-        ChangeColorBrick();
-    }
 
     public void ChangeColorBrick()
     {
-        Debug.Log("colorTypes count: " + character.colorTypes.Count);
-        if (character.colorTypes.Count == 0)
+        Debug.Log("colorTypes count: " + ColorManager.Instance.colorTypes.Count);
+        if (ColorManager.Instance.colorTypes.Count == 0)
         {
             Debug.LogError("colorTypes is empty. Cannot change color.");
             return;  // Nếu danh sách rỗng, thoát khỏi phương thức
         }
         // colorType = (ColorType)Random.Range(0, 4);
-        int randomIndex = Random.Range(0, character.colorTypes.Count);
-        colorType = character.colorTypes[randomIndex];
+        int randomIndex = Random.Range(0, ColorManager.Instance.colorTypes.Count);
+       ColorType colorType = ColorManager.Instance.colorTypes[randomIndex];
 
         m_Renderer.material = colorData.GetMaterial(colorType);
     }

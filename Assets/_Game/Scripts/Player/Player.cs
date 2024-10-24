@@ -12,10 +12,14 @@ public class Player : Character
     [SerializeField] GameObject playerVisual;
 
     //[SerializeField] private Rigidbody rb;
-
-    private void Start()
+    private void Awake()
     {
-
+        
+        
+    }
+    protected override void Start()
+    {
+        base.Start();
         OnInit();
     }
     private void Update()
@@ -36,6 +40,8 @@ public class Player : Character
     private void OnInit()
     {
         ChangeColor();
+        AddColorTypes(colorType);
+
     }
   
     private void MovePlayer()
