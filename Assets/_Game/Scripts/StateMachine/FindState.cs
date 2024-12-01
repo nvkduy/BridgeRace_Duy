@@ -2,33 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FindState : IState<Character>
+public class FindState : IState<Bot>
 {
-    
-
     private int brickNumber;
-    private int currentBrick;
     
     
-    public void OnEnter(Character t)
+    public void OnEnter(Bot t)
     {
-        Bot bot = t.GetComponent<Bot>();
-        brickNumber = Random.Range(5,8);
+        brickNumber = Random.Range(3,6);
         t.ChangeAnim(Constant.RunAnimName);
-        //(t as Bot).BotMove(bot.getBrick.transform.position); 
     }
 
-    public void OnExecute(Character t)
+    public void OnExecute(Bot t)
     {
-        if (currentBrick < brickNumber)
+        if (t.playerBrick.Count < brickNumber)
         {
-            (t as Bot).FindBrick(300f);
+            t.FindBrick(t.transform.position, 10f);
+            t.SetDestination(t.targetBirck);
         }
-        Debug.Log("FindState");
+        else
+        {
+            t.ChangeState(new BuildState());
+        }
     }
 
-    public void OnExit(Character t)
+    public void OnExit(Bot t)
     {
        
     }
+
+
 }

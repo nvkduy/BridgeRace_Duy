@@ -5,48 +5,97 @@ using UnityEngine.AI;
 
 public class Bot : Character
 {
-
-    public NavMeshAgent agent;
     [SerializeField] private GameObject botGoal;
+    [SerializeField] private LayerMask brickLayer;
+    public NavMeshAgent agent;
+    public int numOfBrick;
+    private IState<Bot> currentState;
+    private Vector3 destionation;
+    public Vector3 targetBirck;
+    private Collider[] hitColliders = new Collider[15];
+    public bool IsDestination => Vector3.Distance(destionation, Vector3.right * transform.position.x + Vector3.forward * transform.position.z) < 0.1f;
 
-    int brickLayer;
-    private void Awake()
+
+    protected void Start()
     {
-        
-        
-    }
-    protected override void Start()
-    {
-        base.Start();
         OnInit();
 
     }
+    void Update()
+    {
+        if (currentState != null)
+        {
+            currentState.OnExecute(this);
+        }
+    }
     private void OnInit()
     {
-        brickLayer = LayerMask.GetMask("GroundBrick");
-
+        ChangeState(new FindState());
         ChangeColor();
-        AddColorTypes(colorType);
+
     }
-    public void BotMove(Vector3 position)
+    public void ChangeState(IState<Bot> state)
+    {
+        if (currentState != null)
+        {
+            currentState.OnExit(this);
+        }
+
+        currentState = state;
+
+        if (currentState != null)
+        {
+            currentState.OnEnter(this);
+        }
+    }
+
+
+    public void BotMove()
     {
         Vector3 targetBot = botGoal.transform.position;
-        agent.SetDestination(targetBot);
+        SetDestination(targetBot);
     }
 
-    public void FindBrick(float radius)
-    {
-        
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius,brickLayer);
-        foreach (var hitCollider in hitColliders)
-        {
-            GroundBrick brick=hitCollider.GetComponent<GroundBrick>();
-            if (brick != null &&brick.colorType==colorType)
-            {
-                Vector3 targetBot = brick.transform.position;
-            }
 
+    public void FindBrick(Vector3 position, float radius)
+    {
+        numOfBrick = Physics.OverlapSphereNonAlloc(position, radius, hitColliders, brickLayer);
+        float minDistance = Mathf.Infinity;
+        Collider nearestEnemy = null;
+        for (int i = 0; i < numOfBrick; i++)
+        {
+            if (hitColliders[i].gameObject != this.gameObject)
+            {
+                GroundBrick brick = Cache.GetGroundBrick(hitColliders[i]);
+                if(brick.ColorTypeBrick == ColorType)
+                {
+                    float distance = Vector3.Distance(position, hitColliders[i].transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        nearestEnemy = hitColliders[i];
+                    }
+                }
+               
+            }
+        }
+        if (nearestEnemy != null)
+        {
+            targetBirck = nearestEnemy.transform.position;
         }
         
     }
+
+    protected override void OnTriggerEnter(Collider collision)
+    {
+        base.OnTriggerEnter(collision);
+    }
+    public void SetDestination(Vector3 position)
+    {
+        agent.enabled = true;
+        destionation = position;
+        destionation.y = 0;
+        agent.SetDestination(position);
+    }
+
 }

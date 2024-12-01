@@ -18,7 +18,7 @@ namespace DoorScript
 
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             if (open)
             {
@@ -36,7 +36,7 @@ namespace DoorScript
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Player"))
+            if (collision.gameObject.CompareTag("Character"))
             {
                 open = true;
                 boxCollider.enabled = false;

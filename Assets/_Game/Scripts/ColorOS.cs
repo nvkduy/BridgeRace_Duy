@@ -9,7 +9,7 @@ public enum ColorType
     Green=1,
     Blue=2,
     Yellow=3,
-    Orange = 5,
+    Orange = 4,
     None = 100  
 }
 
