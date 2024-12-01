@@ -10,13 +10,10 @@ public class Player : Character
     [SerializeField] private float speedMove = 5f;
     [SerializeField] private FloatingJoystick floatingJoystick;
     [SerializeField] GameObject playerVisual;
-    protected void Start()
-    {
-        OnInit();
-    }
+  
     private void Update()
     {
-
+        Debug.Log(floatingJoystick.Horizontal);
         if (floatingJoystick.Horizontal != 0 && floatingJoystick.Vertical != 0)
         {
 
@@ -29,7 +26,7 @@ public class Player : Character
         }
 
     }
-    private void OnInit()
+    internal void OnInit()
     {
         ChangeColor();
 

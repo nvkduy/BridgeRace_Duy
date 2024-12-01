@@ -21,7 +21,7 @@ public class Floor : MonoBehaviour
     {
         
         GetPosBrick();
-        amount = spawnedPos.Count / 2;
+        amount = spawnedPos.Count / LevelManager.Instance.CharacterAmount;
         Debug.Log(brickParent);
     }
     public void InitColor(Character character)

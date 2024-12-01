@@ -28,7 +28,7 @@ public class Bot : Character
             currentState.OnExecute(this);
         }
     }
-    private void OnInit()
+    internal void OnInit()
     {
         ChangeState(new FindState());
         ChangeColor();
@@ -50,11 +50,6 @@ public class Bot : Character
     }
 
 
-    public void BotMove()
-    {
-        Vector3 targetBot = botGoal.transform.position;
-        SetDestination(targetBot);
-    }
 
 
     public void FindBrick(Vector3 position, float radius)

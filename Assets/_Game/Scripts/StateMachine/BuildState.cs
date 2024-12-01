@@ -11,7 +11,7 @@ public class BuildState : IState<Bot>
 
     public void OnExecute(Bot t)
     {
-        t.BotMove();
+        t.SetDestination(LevelManager.Instance.FinishPoint);
         if(t.playerBrick.Count == 0)
         {
             t.ChangeState(new FindState());

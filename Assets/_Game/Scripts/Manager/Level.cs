@@ -7,4 +7,5 @@ public class Level : MonoBehaviour
     [SerializeField] internal int botAmount;
     [SerializeField] internal Transform startPoint;
     [SerializeField] internal Transform finishPoint;
+
 }  
